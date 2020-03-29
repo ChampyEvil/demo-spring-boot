@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    def mvnHome = tool name: 'maven', type: 'maven'
+
     environment {
         dockerImage = ''
     }
@@ -8,12 +8,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh '${mvnHome}/bin/mvn -B -DskipTests clean package'
+                sh 'mvn -B -DskipTests clean package'
             }
         }
         stage('Test') {
             steps {
-                sh '${mvnHome}/bin/mvn test'
+                sh 'mvn test'
             }
             post {
                 always {
