@@ -24,7 +24,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    dockerImage = docker.build("demo-spring-boot")
+                    dockerImage = docker.build("gcr.io/gold-courage-272406/demo-spring-boot")
                 }
             }
         }
