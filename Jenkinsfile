@@ -24,7 +24,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    dockerImage = docker.build("gcr.io/gold-courage-272406/demo-spring-boot")
+                    dockerImage = docker.build("champyevil/demo-spring-boot")
                 }
             }
         }
@@ -41,7 +41,11 @@ pipeline {
         }
         stage('Deployment') {
             steps {
-                sh 'kubectl apply -f deployment.yml';
+                sh 'ssh -i id_rsa champypokemon123@35.184.174.229';
+                sh 'docker pull champyevil/demo-spring-boot';
+                sh 'docker-compose down';
+                sh 'docker-compose up -d';
+                sh 'exit';
             }
         }
     }
