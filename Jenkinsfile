@@ -41,7 +41,7 @@ pipeline {
         }
         stage('Deployment') {
             steps {
-                sh 'ssh -i id_rsa champypokemon123@35.184.174.229';
+                sh 'ssh champypokemon123@35.184.174.229';
                 sh 'docker pull champyevil/demo-spring-boot';
                 sh 'docker-compose down';
                 sh 'docker-compose up -d';
