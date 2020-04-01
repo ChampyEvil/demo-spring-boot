@@ -41,11 +41,15 @@ pipeline {
         }
         stage('Deployment') {
             steps {
-                sh 'ssh -o StrictHostKeyChecking=no champypokemon123@35.184.174.229';
-                sh 'docker pull champyevil/demo-spring-boot';
-                sh 'docker-compose down';
-                sh 'docker-compose up -d';
-                sh 'exit';
+                script {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'champypokemon123', keyFileVariable: 'id_rsa', passphraseVariable: '', usernameVariable: 'champypokemon123')]) {
+                        sh 'ssh -i id_rsa champypokemon123@35.184.174.229';
+                        sh 'docker pull champyevil/demo-spring-boot';
+                        sh 'docker-compose down';
+                        sh 'docker-compose up -d';
+                        sh 'exit';
+                    }
+                }
             }
         }
     }
